@@ -1,14 +1,7 @@
 from varasto import Varasto
 
 
-def main():
-    mehua = Varasto(100.0)
-    olutta = Varasto(100.0, 20.2)
-
-    print("Luonnin jälkeen:")
-    print(f"Mehuvarasto: {mehua}")
-    print(f"Olutvarasto: {olutta}")
-
+def getterit_ja_setterit(olutta, mehua):
     print("Olut getterit:")
     print(f"saldo = {olutta.saldo}")
     print(f"tilavuus = {olutta.tilavuus}")
@@ -22,36 +15,49 @@ def main():
     mehua.ota_varastosta(3.14)
     print(f"Mehuvarasto: {mehua}")
 
+
+def virhetilanteet():
     print("Virhetilanteita:")
     print("Varasto(-100.0);")
     huono = Varasto(-100.0)
     print(huono)
 
+
+def lisaa_tai_ota(varastonimi, tuote, varasto, maara, moodi="lisaa"):
+    print(f"{varastonimi}: {varasto}")
+    if moodi == "lisaa":
+        print(f"{tuote}.lisaa_varastoon({maara})")
+        varasto.lisaa_varastoon(maara)
+    elif moodi == "ota":
+        print(f"{tuote}.ota_varastosta({maara})")
+        saatiin = varasto.ota_varastosta(maara)
+        print(f"saatiin {saatiin}")
+    print(f"{varastonimi}: {varasto}")
+
+
+def main():
+    mehua = Varasto(100.0)
+    olutta = Varasto(100.0, 20.2)
+
+    print("Luonnin jälkeen:")
+    print(f"Mehuvarasto: {mehua}")
+    print(f"Olutvarasto: {olutta}")
+
+    getterit_ja_setterit(olutta, mehua)
+
+    virhetilanteet()
+
     print("Varasto(100.0, -50.7)")
     huono = Varasto(100.0, -50.7)
     print(huono)
 
-    print(f"Olutvarasto: {olutta}")
-    print("olutta.lisaa_varastoon(1000.0)")
-    olutta.lisaa_varastoon(1000.0)
-    print(f"Olutvarasto: {olutta}")
+    lisaa_tai_ota("Olutvarasto", "olutta", olutta, 1000.0)
 
-    print(f"Mehuvarasto: {mehua}")
-    print("mehua.lisaa_varastoon(-666.0)")
-    mehua.lisaa_varastoon(-666.0)
-    print(f"Mehuvarasto: {mehua}")
+    lisaa_tai_ota("Mehuvarasto", "mehua", mehua, -666.0)
 
-    print(f"Olutvarasto: {olutta}")
-    print("olutta.ota_varastosta(1000.0)")
-    saatiin = olutta.ota_varastosta(1000.0)
-    print(f"saatiin {saatiin}")
-    print(f"Olutvarasto: {olutta}")
+    lisaa_tai_ota("Olutvarasto", "olutta", olutta, 1000.0, "ota")
 
-    print(f"Mehuvarasto: {mehua}")
-    print("mehua.otaVarastosta(-32.9)")
-    saatiin = mehua.ota_varastosta(-32.9)
-    print(f"saatiin {saatiin}")
-    print(f"Mehuvarasto: {mehua}")
+    lisaa_tai_ota("Mehuvarasto", "mehua", mehua, -666.0, "ota")
 
 
 if __name__ == "__main__":
