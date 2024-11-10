@@ -36,6 +36,8 @@ def lisaa_tai_ota(varastonimi, tuote, varasto, maara, moodi="lisaa"):
 
 
 def main():
+    print("breaking pylint")
+
     mehua = Varasto(100.0)
     olutta = Varasto(100.0, 20.2)
 
